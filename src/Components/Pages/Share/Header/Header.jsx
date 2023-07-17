@@ -11,8 +11,8 @@ const Header = () => {
         <Link to="/">Home</Link>
         <Link to="/Home">Contact Us</Link>
         <Link to="/Home">Dashboard</Link>
-        <Link to="/Home">Our Menu</Link>
-        <Link to="/Home">Our Shop</Link>
+        <Link to="/Our_Menu">Our Menu</Link>
+        <Link to="/Our_shop">Our Shop</Link>
        
         <Link to="/Home"><img className='' style={{height:"20px"}}src={cart}alt="data"/></Link>
         <Link to="/Home">Sign Out</Link>

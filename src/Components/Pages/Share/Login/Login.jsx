@@ -1,8 +1,12 @@
 import React from 'react';
+import { useContext } from 'react';
 import { useRef } from 'react';
 import { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { AuthData } from '../AuthProvider/AuthProvider';
 const Login = () => {
+    const {word,login}=useContext(AuthData);
+    console.log(word);
     function onChange(value) {
         console.log("Captcha value:", value);
         setDisable(false);
@@ -14,6 +18,18 @@ const Login = () => {
         const email=form.email.value;
         const password=form.password.value;
         console.log(email,password);
+        login(email,password).then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            console.log(user);
+            // ...
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorMessage);
+          });
+        
     }
     return (
         <div className="hero min-h-screen bg-base-200">

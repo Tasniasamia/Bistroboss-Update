@@ -9,6 +9,7 @@ import Home from "./Components/Pages/Home/Home/Home";
 import Our_Menu from "./Components/Pages/Home/Our Menu/Our Menu";
 import Our_Shop from "./Components/Pages/Home/Our Shop/Our_Shop";
 import Login from "./Components/Pages/Share/Login/Login";
+import Resister from "./Components/Pages/Share/Resister/Resister";
 
 
 export const router = createBrowserRouter([{
@@ -37,6 +38,9 @@ export const router = createBrowserRouter([{
       path:"/login",
       element:<Login></Login>
     }
-    
+    ,{
+      path:"/resister",
+      element:<Resister></Resister>
+    }
   
 ]);

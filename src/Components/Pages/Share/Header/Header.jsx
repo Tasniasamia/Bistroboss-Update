@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import cart from '../../../../assets/icon/carticon.png';
 import account from '../../../../assets/Vector.png';
 import logo from '../../../../assets/Group 1.png';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { AuthData } from '../AuthProvider/AuthProvider';
 const Header = () => {
+  const {user,logOut,setLoad}=useContext(AuthData);
+  
     const list=(
         <>
         <Link to="/">Home</Link>
@@ -15,8 +18,12 @@ const Header = () => {
         <Link to="/Our_shop">Our Shop</Link>
        
         <Link to="/Home"><img className='' style={{height:"20px"}}src={cart}alt="data"/></Link>
-        <Link to="/login">Login</Link>
-        <Link to="/login">Resister</Link>
+        {
+          user?<Link onClick={logOut}>LogOut</Link>:<Link to="/login">Login</Link>
+
+        }
+        
+        <Link to="/resister">Resister</Link>
         {/* <Link to="/login">Sign Out</Link> */}
 
         <Link to="/home"><img style={{height:"20px"}} src={account}alt="data"/></Link>

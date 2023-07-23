@@ -8,10 +8,11 @@ import HomeLayout from "./Components/Layout/HomeLayout";
 import Home from "./Components/Pages/Home/Home/Home";
 import Our_Menu from "./Components/Pages/Home/Our Menu/Our Menu";
 import Our_Shop from "./Components/Pages/Home/Our Shop/Our_Shop";
+import Login from "./Components/Pages/Share/Login/Login";
 
 
-export const router = createBrowserRouter([
-  {
+export const router = createBrowserRouter([{
+  
     path: "/",
     element: <HomeLayout></HomeLayout>,
     children:[
@@ -29,7 +30,13 @@ export const router = createBrowserRouter([
       },{
         path:"/Our_shop/:title",
         element:<Our_Shop></Our_Shop>
-      }
-    ]
-  },
+      },
+    ]}
+    ,
+    {
+      path:"/login",
+      element:<Login></Login>
+    }
+    
+  
 ]);

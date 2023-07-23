@@ -15,7 +15,10 @@ const Header = () => {
         <Link to="/Our_shop">Our Shop</Link>
        
         <Link to="/Home"><img className='' style={{height:"20px"}}src={cart}alt="data"/></Link>
-        <Link to="/Home">Sign Out</Link>
+        <Link to="/login">Login</Link>
+        <Link to="/login">Resister</Link>
+        {/* <Link to="/login">Sign Out</Link> */}
+
         <Link to="/home"><img style={{height:"20px"}} src={account}alt="data"/></Link>
         </>
     )

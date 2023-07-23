@@ -4,7 +4,11 @@ import { useRef } from 'react';
 import { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { AuthData } from '../AuthProvider/AuthProvider';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 const Login = () => {
+    const locatiion=useLocation();
+    const navigate=useNavigate();
+    let from = location.state?.from?.pathname || "/";
     const {word,login}=useContext(AuthData);
     console.log(word);
     function onChange(value) {
@@ -22,6 +26,7 @@ const Login = () => {
             // Signed in 
             const user = userCredential.user;
             console.log(user);
+            navigate(from);
             // ...
           })
           .catch((error) => {
@@ -61,6 +66,7 @@ const Login = () => {
                 <button className="btn btn-primary"disabled={disable}>Login</button>
               </div>
             </form>
+            <p className="text-center py-3">Create a new Account? <Link to="/resister">Sign Up</Link></p>
           </div>
         </div>
       </div>

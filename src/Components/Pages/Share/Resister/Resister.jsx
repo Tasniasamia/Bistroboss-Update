@@ -1,8 +1,11 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthData } from '../AuthProvider/AuthProvider';
+import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Resister = () => {
+    const navigate=useNavigate();
     const{SignUp,UpdateProfile,logOut}=useContext(AuthData);
     const {
         register,
@@ -21,9 +24,20 @@ const Resister = () => {
         // Signed in 
         const user = userCredential.user;
         console.log(user);
+
         UpdateProfile(photo,name).then(() => {
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'Your information has been saved',
+                showConfirmButton: false,
+                timer: 1500
+              })
             reset();
             logOut();
+            navigate('/login');
+            
+          
             
         }).catch((error) => {
          
@@ -77,6 +91,8 @@ const Resister = () => {
          {errors.photo && <span>This field is required</span>}              </div>
           <input type="submit"value="Sign Up"className="btn btn-primary w-full my-5" />
         </form>
+
+        <p className="text-center py-2">Aready exist a Account? <Link to="/login">Sign In</Link></p>
         </div></div></div>
       )
 };

@@ -19,14 +19,20 @@ const Header = () => {
        
         <Link to="/Home"><img className='' style={{height:"20px"}}src={cart}alt="data"/></Link>
         {
-          user?<Link onClick={logOut}>LogOut</Link>:<Link to="/login">Login</Link>
+          user?<Link onClick={logOut}>Sign Out</Link>:<Link to="/login">Login</Link>
 
         }
         
-        <Link to="/resister">Resister</Link>
-        {/* <Link to="/login">Sign Out</Link> */}
+       
+        {/* <Link to="/login"></Link> 
 
-        <Link to="/home"><img style={{height:"20px"}} src={account}alt="data"/></Link>
+*/}
+{
+  user?<Link><img className="rounded-lg" style={{height:"20px"}} src={user?.photoURL}alt="data"title={user?.displayName}/></Link>:<Link ><img style={{height:"20px"}} src={account}alt="data"/></Link>
+}
+        
+
+        
         </>
     )
     return (

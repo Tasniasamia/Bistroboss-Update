@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 const Login = () => {
     const locatiion=useLocation();
     const navigate=useNavigate();
-    let from = location.state?.from?.pathname || "/";
+    let from = locatiion?.state?.from?.pathname || "/";
     const {word,login}=useContext(AuthData);
     console.log(word);
     function onChange(value) {

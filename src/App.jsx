@@ -27,7 +27,7 @@ export const router = createBrowserRouter([{
       },
       {
         path:"/Our_Menu",
-        element:<PrivateRoute><Our_Menu></Our_Menu></PrivateRoute>
+        element:<Our_Menu></Our_Menu>
       },
       {
         path:"/about",
@@ -35,7 +35,7 @@ export const router = createBrowserRouter([{
       },
       {
         path:"/Our_shop",
-        element:<PrivateRoute><Our_Shop></Our_Shop></PrivateRoute>
+        element:<Our_Shop></Our_Shop>
       },{
         path:"/Our_shop/:title",
         element:<Our_Shop></Our_Shop>

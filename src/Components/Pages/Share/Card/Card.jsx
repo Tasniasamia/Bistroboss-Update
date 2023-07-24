@@ -2,11 +2,13 @@ import React from 'react';
 import { useContext } from 'react';
 import { AuthData } from '../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Card = ({food}) => {
   const {user}=useContext(AuthData);
  
-  
+  const location=useLocation();
+  const navigate=useNavigate();
   const pikdata=(fooddata)=>{
    
    console.log(fooddata);
@@ -14,8 +16,9 @@ const Card = ({food}) => {
     const datacollection={
       email: user?.email, menuid:fooddata._id,  name:fooddata.name , image:fooddata.image , price:fooddata.price
     }
-    console.log(datacollection);
-    fetch('http://localhost:3650/users', {
+    // console.log(datacollection);
+    
+    fetch(`http://localhost:3650/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -34,6 +37,7 @@ const Card = ({food}) => {
                 timer: 1500
             });
         }
+       
     });
 
 
@@ -43,7 +47,24 @@ const Card = ({food}) => {
 
 
    }
+   else{
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Login it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        navigate('/login',{state:{from:location}});
+
      
+      }
+    })
+  }
   }
     return (
         <div className="card w-96 md:h-[500px] h-[500px] bg-base-100 shadow-xl rounded-none">

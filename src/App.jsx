@@ -11,6 +11,7 @@ import Our_Shop from "./Components/Pages/Home/Our Shop/Our_Shop";
 import Login from "./Components/Pages/Share/Login/Login";
 import Resister from "./Components/Pages/Share/Resister/Resister";
 import PrivateRoute from "./Components/Pages/Share/PrivateRoute/PrivateRoute";
+import About from "./Components/Pages/Home/About/About";
 
 
 export const router = createBrowserRouter([{
@@ -27,12 +28,17 @@ export const router = createBrowserRouter([{
         element:<PrivateRoute><Our_Menu></Our_Menu></PrivateRoute>
       },
       {
+        path:"/about",
+        element:<About></About>
+      },
+      {
         path:"/Our_shop",
         element:<PrivateRoute><Our_Shop></Our_Shop></PrivateRoute>
       },{
         path:"/Our_shop/:title",
         element:<Our_Shop></Our_Shop>
       },
+      
     ]}
     ,
     {

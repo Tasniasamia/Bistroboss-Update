@@ -12,6 +12,8 @@ import Login from "./Components/Pages/Share/Login/Login";
 import Resister from "./Components/Pages/Share/Resister/Resister";
 import PrivateRoute from "./Components/Pages/Share/PrivateRoute/PrivateRoute";
 import About from "./Components/Pages/Home/About/About";
+import Dashboard from "./Components/Layout/Dashboard";
+import MyCart from "./Components/Pages/Dashboard/MyCart";
 
 
 export const router = createBrowserRouter([{
@@ -48,6 +50,17 @@ export const router = createBrowserRouter([{
     ,{
       path:"/resister",
       element:<Resister></Resister>
+    },
+    {
+      path:"Dashboard",
+      element:<Dashboard></Dashboard>,
+      children:[
+        {
+          path:"Mycart",
+          element:<MyCart></MyCart>
+
+        }
+      ]
     }
   
 ]);

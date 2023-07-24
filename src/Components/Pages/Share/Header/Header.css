@@ -1,4 +1,7 @@
-ul.mymenu a{
+ul.mymenu  a{
     margin-left: 15px;
     color:white;
+}
+ul.mymenu  a.active{
+    color:blueviolet;
 }

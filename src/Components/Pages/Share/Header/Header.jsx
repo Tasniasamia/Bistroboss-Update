@@ -1,34 +1,35 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './Header.css';
 import cart from '../../../../assets/icon/carticon.png';
 import account from '../../../../assets/Vector.png';
 import logo from '../../../../assets/Group 1.png';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { AuthData } from '../AuthProvider/AuthProvider';
+import './Header.css';
 const Header = () => {
   const {user,logOut,setLoad}=useContext(AuthData);
   
     const list=(
         <>
-        <Link to="/">Home</Link>
-        <Link to="/Home">Contact Us</Link>
-        <Link to="/Home">Dashboard</Link>
-        <Link to="/Our_Menu">Our Menu</Link>
-        <Link to="/Our_shop">Our Shop</Link>
+        <NavLink to="/" className="active">Home</NavLink>
+        <NavLink to="/Home">Contact Us</NavLink>
+        <NavLink to="/Dashboard">Dashboard</NavLink>
+        <NavLink to="/Our_Menu">Our Menu</NavLink>
+        <NavLink to="/Our_shop">Our Shop</NavLink>
        
-        <Link to="/Home"><img className='' style={{height:"20px"}}src={cart}alt="data"/></Link>
+        <NavLink to="/Home"><img className='' style={{height:"20px"}}src={cart}alt="data"/></NavLink>
         {
-          user?<Link onClick={logOut}>Sign Out</Link>:<Link to="/login">Login</Link>
+          user?<NavLink onClick={logOut} to="/login">Sign Out</NavLink>:<NavLink to="/login">Login</NavLink>
 
         }
         
        
-        {/* <Link to="/login"></Link> 
+        {/* <NavLink to="/login"></NavLink> 
 
 */}
 {
-  user?<Link><img className="rounded-lg" style={{height:"20px"}} src={user?.photoURL}alt="data"title={user?.displayName}/></Link>:<Link ><img style={{height:"20px"}} src={account}alt="data"/></Link>
+  user?<NavLink><img className="rounded-lg" style={{height:"20px"}} src={user?.photoURL}alt="data"title={user?.displayName}/></NavLink>:<NavLink ><img style={{height:"20px"}} src={account}alt="data"/></NavLink>
 }
         
 

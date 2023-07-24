@@ -5,6 +5,7 @@ import { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { AuthData } from '../AuthProvider/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 const Login = () => {
     const locatiion=useLocation();
     const navigate=useNavigate();
@@ -26,6 +27,13 @@ const Login = () => {
             // Signed in 
             const user = userCredential.user;
             console.log(user);
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'Your login has become successfull',
+                showConfirmButton: false,
+                timer: 1500
+              })
             navigate(from);
             // ...
           })

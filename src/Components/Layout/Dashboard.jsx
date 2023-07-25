@@ -1,7 +1,10 @@
 import React from 'react';
 import { AiOutlineMenu } from "react-icons/ai";
 import { NavLink, Outlet } from 'react-router-dom';
+import useUser from '../../../Hooks/useUser';
 const Dashboard = () => {
+  const [isLoading,refetch,Alluser]=useUser();
+  let IsAdmin=true;
     return (
         <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -14,10 +17,15 @@ const Dashboard = () => {
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
           <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
             {/* Sidebar content here */}
-            <NavLink to="/Dashboard">User Home</NavLink>
-            <NavLink>Reservation</NavLink>
-            <NavLink>Payment Histor</NavLink>
-            <NavLink to="/Dashboard/Mycart">MyCart</NavLink>
+  {
+    IsAdmin? <>          <NavLink to="/Dashboard">Admin Home</NavLink>
+    <NavLink>Add Item</NavLink>
+    <NavLink  to="/Dashboard/Alluser">Manage User</NavLink>
+    <NavLink>Manage Item</NavLink></>:      <>   <NavLink to="/Dashboard">User Home</NavLink>
+    <NavLink>Reservation</NavLink>
+    <NavLink>Payment Histor</NavLink>
+    <NavLink to="/Dashboard/Mycart">MyCart</NavLink></> 
+  }
             <div className="flex flex-col w-full border-opacity-50">
   <div className="divider"></div>
 </div>

@@ -14,7 +14,7 @@ const MyCart = () => {
       },0); 
       console.log(sum);
 
-
+//delete user 
       const deletecart=(id)=>{
         fetch(`http://localhost:3650/user/${id}`,{
           method: 'DELETE',
@@ -37,6 +37,9 @@ const MyCart = () => {
           }
         })
       }
+
+
+     
     return (
         <div className='w-full mx-10'>
             <div className='flex justify-between'>
@@ -54,7 +57,7 @@ const MyCart = () => {
             } */}
       {/* table start */}
       <div>
-  <div className='table w-full'>
+  <table className='table w-full'>
     {/* head */}
     <thead >
       <tr>
@@ -108,7 +111,7 @@ Item          </label>
       }
     */}
     
-  </div>
+  </table>
 </div>
       {/* table end */}
       </div>

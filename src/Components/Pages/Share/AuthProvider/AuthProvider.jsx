@@ -1,13 +1,15 @@
 import React from 'react';
 import { useState,useEffect } from 'react';
 import { createContext } from 'react';
-import { getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword,updateProfile,onAuthStateChanged,signOut} from "firebase/auth";
+import { getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword,updateProfile,onAuthStateChanged,signOut,GoogleAuthProvider,signInWithPopup} from "firebase/auth";
 import { app } from '../../../../../Firebase/Firebase_Config';
 export const AuthData=createContext();
 
 const AuthProvider = ({children}) => {
     const auth = getAuth(app);
 
+
+    const provider = new GoogleAuthProvider();
     const word="Hellow";
     const[user,setUser]=useState(null);
     const[load,setLoad]=useState(true);
@@ -30,7 +32,12 @@ return     signInWithEmailAndPassword(auth, email, password);
             displayName: name, photoURL: photo
           })
     }
+//Google Sign in
+const googleSignIn=()=>{
+  setLoad(true);
+  return signInWithPopup(auth, provider)
 
+}
     //Manage User
     useEffect(()=>{
         const unsubscribe=onAuthStateChanged(auth, (user) => {
@@ -61,7 +68,7 @@ return     signInWithEmailAndPassword(auth, email, password);
         // An error happened.
       });
     }
-    const datacollection={word,user,load,setLoad,login,SignUp,UpdateProfile,logOut}
+    const datacollection={word,user,load,setLoad,login,SignUp,UpdateProfile,logOut,googleSignIn}
     return (
        <AuthData.Provider value={datacollection}>
 {children}

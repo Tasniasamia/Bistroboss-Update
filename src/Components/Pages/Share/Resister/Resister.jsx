@@ -3,9 +3,12 @@ import { useForm } from 'react-hook-form';
 import { AuthData } from '../AuthProvider/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import Google from '../Google_sign/Google';
+import { useState } from 'react';
 
 const Resister = () => {
     const navigate=useNavigate();
+    const[err,setErr]=useState(null);
     const{SignUp,UpdateProfile,logOut}=useContext(AuthData);
     const {
         register,
@@ -26,6 +29,9 @@ const Resister = () => {
         console.log(user);
 
         UpdateProfile(photo,name).then(() => {
+          
+
+          
             Swal.fire({
                 position: 'top-center',
                 icon: 'success',
@@ -33,13 +39,49 @@ const Resister = () => {
                 showConfirmButton: false,
                 timer: 1500
               })
-            reset();
-            logOut();
-            navigate('/login');
+
+              const data={ email:user.email, name:user.displayName}
+              fetch('http://localhost:3650/Allusers',{
+                method:"POST",
+                headers:{
+                  "Content-Type":"application/json"
+                },
+                body:JSON.stringify(data)
+              }).then(res=>res.json())
+              .then((data)=>{
+
+                if(data.insertedId){
+                  Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Users information has been saved into Database',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+
+                  reset();
+                  logOut();
+                  navigate('/login');
+                }
+              })
+              .catch(error => {
+                console.error('Error fetching data:', error.message);
+                setErr(error.message);
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: `${err}`,
+                  footer: '<a href="">Why do I have this issue?</a>'
+                })
+              });
+           
             
           
             
         }).catch((error) => {
+          const message=error.message;
+     
+          
          
         });
         // ...
@@ -47,6 +89,7 @@ const Resister = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        setErr(errorMessage);
         console.log(errorMessage);
       });
     
@@ -91,6 +134,10 @@ const Resister = () => {
          {errors.photo && <span>This field is required</span>}              </div>
           <input type="submit"value="Sign Up"className="btn btn-primary w-full my-5" />
         </form>
+
+        <div className='text-center my-5'>
+          <Google></Google>
+        </div>
 
         <p className="text-center py-2">Aready exist a Account? <Link to="/login">Sign In</Link></p>
         </div></div></div>

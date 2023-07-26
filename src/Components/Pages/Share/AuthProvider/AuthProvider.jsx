@@ -3,6 +3,7 @@ import { useState,useEffect } from 'react';
 import { createContext } from 'react';
 import { getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword,updateProfile,onAuthStateChanged,signOut,GoogleAuthProvider,signInWithPopup} from "firebase/auth";
 import { app } from '../../../../../Firebase/Firebase_Config';
+import axios from 'axios';
 export const AuthData=createContext();
 
 const AuthProvider = ({children}) => {
@@ -44,7 +45,14 @@ const googleSignIn=()=>{
             if (user) {
          setLoad(false);
           setUser(user);
+axios.post('http://localhost:3650/jwt',{email:user.email})
+.then(data=>{console.log(data.data.tokenkey);
+localStorage.setItem("token",data.data.tokenkey)
+
+})
+          
             } else {
+              localStorage.removeItem("token")
               // User is signed out
               // ...
             }

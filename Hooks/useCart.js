@@ -5,12 +5,17 @@ import { AuthData } from '../src/Components/Pages/Share/AuthProvider/AuthProvide
 
 const useCart = () => {
     const {user}=useContext(AuthData);
-  
+  const token=localStorage.getItem("token");
     const { isLoading, refetch, data:cart=[]} = useQuery({
         queryKey: ['repoData',user?.email],
         queryFn: async() =>{
       
-        const response = await fetch(`http://localhost:3650/cart?email=${user?.email}`)
+        const response = await fetch(`http://localhost:3650/cart?email=${user?.email}`,
+        {
+          headers:{
+            authorization: `Bearers ${token}`
+          }
+        })
         if (!response.ok) {
           throw new Error('Network response was not ok')
         }

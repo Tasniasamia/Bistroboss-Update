@@ -3,8 +3,9 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { NavLink, Outlet } from 'react-router-dom';
 import useUser from '../../../Hooks/useUser';
 const Dashboard = () => {
-  const [isLoading,refetch,Alluser]=useUser();
-  let IsAdmin=true;
+  // const [isLoading,refetch,Alluser]=useUser();
+
+  let IsAdmin=false;
     return (
         <div className="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />

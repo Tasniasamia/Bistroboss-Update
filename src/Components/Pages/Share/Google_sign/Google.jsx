@@ -7,14 +7,15 @@ import { useState } from 'react';
 
 const Google = () => {
     const navigate=useNavigate();
-    const [error,setError]=useState(null)
+    // const [errormessage,setMessageerror]=useState("data")
     const{googleSignIn,setLoad}=useContext(AuthData);
-   
+   const token=localStorage.getItem('token');
     const goolesign=()=>{
         googleSignIn().then((result) => {
           
             const user = result.user;
             console.log(user);
+            navigate('/')
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -28,24 +29,26 @@ const Google = () => {
               fetch('http://localhost:3650/Allusers',{
                 method:"POST",
                 headers:{
-                  "Content-Type":"application/json"
-                },
+                  authorization: `Bearers ${token}`
+                }
+            ,
                 body:JSON.stringify(data)
               }).then(res=>res.json())
               .then((data)=>{
                 console.log(data);
             
-                if(data.message){
+                // if(data.message){
                
-                    console.log('Error fetching data:', data.message);
-                    setError(data.message);
-                    Swal.fire({
-                      icon: 'error',
-                      title: 'Oops...',
-                      text: `${error}`,
-                      footer: '<a href="">Why do I have this issue?</a>'
-                    })
-                   }
+                //     console.log('Error fetching data:', data.message);
+                   
+                  
+                //     Swal.fire({
+                //       icon: 'error',
+                //       title: 'Oops...',
+                //       text: `${data.message}`,
+                //       footer: '<a href="">Why do I have this issue?</a>'
+                //     })
+                //    }
 
                 if(data.insertedId){
                   Swal.fire({

@@ -1,12 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthData } from '../AuthProvider/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Google from '../Google_sign/Google';
 import { useState } from 'react';
+import axios from 'axios';
+import useAxiosSecure from '../../../../../Hooks/useAxiosSecure';
 
 const Resister = () => {
+  const axiosSecure=useAxiosSecure();
     const navigate=useNavigate();
     const[err,setErr]=useState(null);
     const{SignUp,UpdateProfile,logOut}=useContext(AuthData);
@@ -41,16 +44,13 @@ const Resister = () => {
               })
 
               const data={ email:user.email, name:user.displayName}
-              fetch('http://localhost:3650/Allusers',{
-                method:"POST",
-                headers:{
-                  "Content-Type":"application/json"
-                },
-                body:JSON.stringify(data)
-              }).then(res=>res.json())
-              .then((data)=>{
+const token=localStorage.getItem('token');
 
-                if(data.insertedId){
+axios.post(' http://localhost:3650/Allusers',  data, { headers:{
+         authorization: `Bearers ${token}`
+     }})
+  .then(data=>{console.log(data);
+                if(data.data.insertedId){
                   Swal.fire({
                     position: 'top-center',
                     icon: 'success',
@@ -60,20 +60,58 @@ const Resister = () => {
                   })
 
                   reset();
-                  logOut();
-                  navigate('/login');
+                  // logOut();
+                  // navigate('/login');
+              
+
                 }
-              })
-              .catch(error => {
-                console.error('Error fetching data:', error.message);
-                setErr(error.message);
+              
+              }) .catch(error => {
+                console.log('Error fetching data:', error.message);
+                // setErr(error.message);
                 Swal.fire({
                   icon: 'error',
                   title: 'Oops...',
-                  text: `${err}`,
+                  text: `${error.message}`,
                   footer: '<a href="">Why do I have this issue?</a>'
                 })
               });
+           
+              // fetch('http://localhost:3650/Allusers',{
+              //   method:"POST",
+              
+              //     headers:{
+              //       authorization: `Bearers ${token}`
+              //     }
+              // ,
+              //   body:JSON.stringify({email:data.email,password:data.password})
+              // }).then(res=>res.json())
+              // .then((data)=>{
+
+              //   if(data.insertedId){
+              //     Swal.fire({
+              //       position: 'top-center',
+              //       icon: 'success',
+              //       title: 'Users information has been saved into Database',
+              //       showConfirmButton: false,
+              //       timer: 1500
+              //     })
+
+              //     reset();
+              //     logOut();
+              //     navigate('/login');
+              //   }
+              // })
+              // .catch(error => {
+              //   console.error('Error fetching data:', error.message);
+              //   setErr(error.message);
+              //   Swal.fire({
+              //     icon: 'error',
+              //     title: 'Oops...',
+              //     text: `${err}`,
+              //     footer: '<a href="">Why do I have this issue?</a>'
+              //   })
+              // });
            
             
           

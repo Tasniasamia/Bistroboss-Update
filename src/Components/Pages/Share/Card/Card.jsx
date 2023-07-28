@@ -3,10 +3,11 @@ import { useContext } from 'react';
 import { AuthData } from '../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Card = ({food}) => {
   const {user}=useContext(AuthData);
- 
+ const token=localStorage.getItem('token');
   const location=useLocation();
   const navigate=useNavigate();
   const pikdata=(fooddata)=>{
@@ -18,17 +19,17 @@ const Card = ({food}) => {
     }
     // console.log(datacollection);
     
-    fetch(`http://localhost:3650/users`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(datacollection),
+    axios.post(`http://localhost:3650/users`,datacollection, {
+    
+      headers:{
+        authorization: `Bearers ${token}`
+      }
+
     })
-    .then((res) => res.json())
+    // .then((res) => res.json())
     .then((data)=> {
         console.log(data);
-        if (data.insertedId) {
+        if (data.data.insertedId) {
             Swal.fire({
                 position: 'top-center',
                 icon: 'success',

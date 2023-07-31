@@ -43,11 +43,12 @@ const googleSignIn=()=>{
     useEffect(()=>{
         const unsubscribe=onAuthStateChanged(auth, (user) => {
             if (user) {
-         setLoad(false);
+       
           setUser(user);
 axios.post('http://localhost:3650/jwt',{email:user.email})
 .then(data=>{console.log(data.data.tokenkey);
 localStorage.setItem("token",data.data.tokenkey)
+setLoad(false);
 
 })
           

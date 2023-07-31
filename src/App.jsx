@@ -15,6 +15,7 @@ import About from "./Components/Pages/Home/About/About";
 import Dashboard from "./Components/Layout/Dashboard";
 import MyCart from "./Components/Pages/Dashboard/MyCart";
 import Alluser from "./Components/Pages/Dashboard/Alluser";
+import AddItem from "./Components/Pages/Share/AddItem/AddItem";
 
 
 export const router = createBrowserRouter([{
@@ -63,6 +64,9 @@ export const router = createBrowserRouter([{
         },{
           path:"Alluser",
           element:<Alluser></Alluser>
+        },{
+          path:"AddItem",
+          element:<AddItem></AddItem>
         }
       ]
     }

@@ -9,7 +9,7 @@ import axios from 'axios';
 import useAxiosSecure from '../../../../../Hooks/useAxiosSecure';
 
 const Resister = () => {
-  const axiosSecure=useAxiosSecure();
+  const [axiosSecure]=useAxiosSecure();
     const navigate=useNavigate();
     const[err,setErr]=useState(null);
     const{SignUp,UpdateProfile,logOut}=useContext(AuthData);
@@ -46,11 +46,47 @@ const Resister = () => {
               const data={ email:user.email, name:user.displayName}
 const token=localStorage.getItem('token');
 
-axios.post(' http://localhost:3650/Allusers',  data, { headers:{
-         authorization: `Bearers ${token}`
-     }})
-  .then(data=>{console.log(data);
-                if(data.data.insertedId){
+// axiosSecure.post(' /Allusers',  data)
+//   .then(data=>{console.log(data);
+//                 if(data.data.insertedId){
+//                   Swal.fire({
+//                     position: 'top-center',
+//                     icon: 'success',
+//                     title: 'Users information has been saved into Database',
+//                     showConfirmButton: false,
+//                     timer: 1500
+//                   })
+
+//                   reset();
+//                    logOut();
+//                    navigate('/login');
+              
+
+//                 }
+              
+//               }) .catch(error => {
+//                 console.log('Error fetching data:', error.message);
+//                 // setErr(error.message);
+//                 Swal.fire({
+//                   icon: 'error',
+//                   title: 'Oops...',
+//                   text: `${error.message}`,
+//                   footer: '<a href="">Why do I have this issue?</a>'
+//                 })
+//               });
+           
+              fetch('http://localhost:3650/Allusers',{
+                method:"POST",
+              
+                  headers:{
+                    authorization: `Bearers ${token}`
+                  }
+              ,
+                body:JSON.stringify(data)
+              }).then(res=>res.json())
+              .then((data)=>{
+
+                if(data.insertedId){
                   Swal.fire({
                     position: 'top-center',
                     icon: 'success',
@@ -60,58 +96,20 @@ axios.post(' http://localhost:3650/Allusers',  data, { headers:{
                   })
 
                   reset();
-                  // logOut();
-                  // navigate('/login');
-              
-
+                  logOut();
+                  navigate('/login');
                 }
-              
-              }) .catch(error => {
-                console.log('Error fetching data:', error.message);
-                // setErr(error.message);
+              })
+              .catch(error => {
+                console.error('Error fetching data:', error.message);
+                setErr(error.message);
                 Swal.fire({
                   icon: 'error',
                   title: 'Oops...',
-                  text: `${error.message}`,
+                  text: `${err}`,
                   footer: '<a href="">Why do I have this issue?</a>'
                 })
               });
-           
-              // fetch('http://localhost:3650/Allusers',{
-              //   method:"POST",
-              
-              //     headers:{
-              //       authorization: `Bearers ${token}`
-              //     }
-              // ,
-              //   body:JSON.stringify({email:data.email,password:data.password})
-              // }).then(res=>res.json())
-              // .then((data)=>{
-
-              //   if(data.insertedId){
-              //     Swal.fire({
-              //       position: 'top-center',
-              //       icon: 'success',
-              //       title: 'Users information has been saved into Database',
-              //       showConfirmButton: false,
-              //       timer: 1500
-              //     })
-
-              //     reset();
-              //     logOut();
-              //     navigate('/login');
-              //   }
-              // })
-              // .catch(error => {
-              //   console.error('Error fetching data:', error.message);
-              //   setErr(error.message);
-              //   Swal.fire({
-              //     icon: 'error',
-              //     title: 'Oops...',
-              //     text: `${err}`,
-              //     footer: '<a href="">Why do I have this issue?</a>'
-              //   })
-              // });
            
             
           

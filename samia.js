@@ -4,3 +4,7 @@ const character2 = myString.charAt(-1); // Index out of range
 
 console.log(character1); // Output: ''
 console.log(character2); // Output: '
+
+const token='token';
+const istoken=`Bearers  ${token}`;
+console.log(istoken.split(' ')[2]);

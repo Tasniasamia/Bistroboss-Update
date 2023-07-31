@@ -20,7 +20,7 @@ const Dashboard = () => {
             {/* Sidebar content here */}
   {
     IsAdmin? <>          <NavLink to="/Dashboard">Admin Home</NavLink>
-    <NavLink>Add Item</NavLink>
+    <NavLink to="/Dashboard/AddItem">Add Item</NavLink>
     <NavLink  to="/Dashboard/Alluser">Manage User</NavLink>
     <NavLink>Manage Item</NavLink></>:      <>   <NavLink to="/Dashboard">User Home</NavLink>
     <NavLink>Reservation</NavLink>

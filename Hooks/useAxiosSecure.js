@@ -35,14 +35,15 @@ const useAxiosSecure = () => {
 
 }
         
+return error.response();
         
         }
     )
 
     
  // eslint-disable-next-line react-hooks/exhaustive-deps
- },[])
- return axiosSecure;
+ },[navigate,logOut,axiosSecure])
+ return [axiosSecure];
 };
 
 export default useAxiosSecure;

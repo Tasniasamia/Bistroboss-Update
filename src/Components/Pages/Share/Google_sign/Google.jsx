@@ -9,7 +9,8 @@ const Google = () => {
     const navigate=useNavigate();
     // const [errormessage,setMessageerror]=useState("data")
     const{googleSignIn,setLoad}=useContext(AuthData);
-   const token=localStorage.getItem('token');
+   const token=localStorage.getItem("token");
+   console.log(token);
     const goolesign=()=>{
         googleSignIn().then((result) => {
           
@@ -28,27 +29,14 @@ const Google = () => {
               }
               fetch('http://localhost:3650/Allusers',{
                 method:"POST",
-                headers:{
-                  authorization: `Bearers ${token}`
-                }
-            ,
+              
+                  headers:{
+                    authorization: `Bearers ${token}`
+                  }
+              ,
                 body:JSON.stringify(data)
               }).then(res=>res.json())
               .then((data)=>{
-                console.log(data);
-            
-                // if(data.message){
-               
-                //     console.log('Error fetching data:', data.message);
-                   
-                  
-                //     Swal.fire({
-                //       icon: 'error',
-                //       title: 'Oops...',
-                //       text: `${data.message}`,
-                //       footer: '<a href="">Why do I have this issue?</a>'
-                //     })
-                //    }
 
                 if(data.insertedId){
                   Swal.fire({
@@ -59,14 +47,10 @@ const Google = () => {
                     timer: 1500
                   })
 
-                 
-                  navigate('/');
+                  // reset();
+                  // logOut();
+                  navigate('/login');
                 }
-             
-             
-                       
-                    
-              
               })
             //   .catch(error => {
             //     console.error('Error fetching data:', error.message);
